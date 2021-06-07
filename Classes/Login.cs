@@ -17,9 +17,9 @@ namespace Projeto_Produtos_0706.Classes
             throw new System.NotImplementedException();
         }
 
-        void ILogin.Login()
+        public Login()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }
