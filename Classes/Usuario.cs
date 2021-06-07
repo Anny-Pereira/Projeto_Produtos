@@ -15,15 +15,31 @@ namespace Projeto_Produtos_0706.Classes
 
         private DateTime DataCadastro { get; set; }
         
+        public int i;
 
         public string Cadastrar(Usuario Usuario)
         {
-            throw new NotImplementedException();
+            i++;
+
+            Usuario.Codigo = i;
+
+            Console.Write($"Data de cadastro: {DataCadastro}");
+            
+            Console.Write("\nInsira seu nome: ");
+            Usuario.Nome = Console.ReadLine();
+
+            Console.Write("Insira seu e-mail: ");
+            Usuario.Email = Console.ReadLine();
+
+            Console.Write("Insira sua senha: ");
+            Usuario.Email = Console.ReadLine();
+
+            return "Usuario cadastrado!";
         }
 
         public string Deletar(Usuario Usuario)
         {
-            throw new NotImplementedException();
+            return $"Usário '{Usuario.Nome}' removido!";
         }
     }
 }
