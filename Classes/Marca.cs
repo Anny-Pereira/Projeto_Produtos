@@ -18,10 +18,8 @@ namespace Projeto_Produtos_0706.Classes
 
         List<Marca> marcas = new List<Marca>();
 
-        public string Cadastrar(Marca Marca)
+        public Marca()
         {
-            Marca marca = new Marca();
-
             i++;
             marca.Codigo = i;
 
@@ -33,7 +31,11 @@ namespace Projeto_Produtos_0706.Classes
             Console.Write("\nInsira o nome da marca: ");
             marca.NomeMarca = Console.ReadLine();
 
+        }
+        
 
+        public string Cadastrar(Marca Marca)
+        {
             marcas.Add(marca);
 
             return "Marca cadastrada!";
