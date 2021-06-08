@@ -5,7 +5,7 @@ namespace Projeto_Produtos_0706.Classes
 {
     public class Usuario : IUsuario
     {
-                public int Codigo { get; set; }
+        public int Codigo { get; set; }
 
         public string Nome { get; set; }
         
@@ -35,13 +35,11 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write("Insira sua senha: ");
             Senha = Console.ReadLine();
-
         }
 
         public string Cadastrar(Usuario usuario)
         {
             ListaUsuario.Add(usuario);
-
             return "Usuario cadastrado!";
         }
 
