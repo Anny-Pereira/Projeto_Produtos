@@ -7,23 +7,39 @@ namespace Projeto_Produtos_0706.Classes
     {
         private int Codigo { get; set; }
 
-        private string Nome { get; set; }
+        public string Nome { get; private set; }
         
         private string Email { get; set; }
 
-        private string Senha { get; set; }
+        public string Senha { get; private set; }
 
         private DateTime DataCadastro { get; set; }
         
+        public int i;
 
-        public string Cadastrar(Usuario Usuario)
+        public string Cadastrar(string usuario)
         {
-            throw new NotImplementedException();
+            i++;
+            
+            Codigo = i;
+
+            Console.Write($"Data de cadastro: {DataCadastro}");
+            
+            Console.Write("\nInsira seu nome: ");
+            Nome = Console.ReadLine();
+
+            Console.Write("Insira seu e-mail: ");
+            Email = Console.ReadLine();
+
+            Console.Write("Insira sua senha: ");
+            Senha = Console.ReadLine();
+
+            return "Usuario cadastrado!";
         }
 
         public string Deletar(Usuario Usuario)
         {
-            throw new NotImplementedException();
+            return $"Usuario '{Nome}' removido!";
         }
     }
 }
