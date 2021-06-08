@@ -1,45 +1,53 @@
 using System;
+using System.Collections.Generic;
 using Projeto_Produtos_0706.Interfaces;
 
 namespace Projeto_Produtos_0706.Classes
 {
     public class Usuario : IUsuario
     {
-        private int Codigo { get; set; }
+        public int Codigo { get; set; }
 
-        private string Nome { get; set; }
+        public string Nome { get; set; }
         
-        private string Email { get; set; }
+        public string Email { get; set; }
 
-        private string Senha { get; set; }
+        public string Senha { get; set; }
 
         private DateTime DataCadastro { get; set; }
         
         public int i;
 
-        public string Cadastrar(Usuario Usuario)
+        public List<Usuario> ListaUsuario = new List<Usuario>();
+
+        public Usuario()
         {
             i++;
 
-            Usuario.Codigo = i;
+            Codigo = i;
 
             Console.Write($"Data de cadastro: {DataCadastro}");
             
             Console.Write("\nInsira seu nome: ");
-            Usuario.Nome = Console.ReadLine();
+            Nome = Console.ReadLine();
 
             Console.Write("Insira seu e-mail: ");
-            Usuario.Email = Console.ReadLine();
+            Email = Console.ReadLine();
 
             Console.Write("Insira sua senha: ");
-            Usuario.Email = Console.ReadLine();
+            Senha = Console.ReadLine();
+        }
 
+        public string Cadastrar(Usuario usuario)
+        {
+            ListaUsuario.Add(usuario);
             return "Usuario cadastrado!";
         }
 
-        public string Deletar(Usuario Usuario)
+        public string Deletar(Usuario usuario)
         {
-            return $"Usário '{Usuario.Nome}' removido!";
+            ListaUsuario.Remove(usuario);
+            return $"Usário '{usuario.Nome}' removido!";
         }
     }
 }

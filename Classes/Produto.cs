@@ -21,19 +21,40 @@ namespace Projeto_Produtos_0706.Classes
        private List<Produto> ListaDeProdutos { get; set; }
        
 
-        public string Cadastrar(Produto Produto)
+        public Produto( string nomeLogado, List<Marca> marcas, List<Usuario> ListaUsuarios){
+            int i = 0;
+            i++;
+            
+            
+            
+            Console.Write("Digite o nome do produto: ");
+            NomeProduto = Console.ReadLine();
+
+            Console.Write("Digite o preço do produto: R$ ");
+            Preco = float.Parse(Console.ReadLine());
+
+            
+            CadastradoPor = ListaUsuarios.Find(item => item.Nome == nomeLogado);
+            
+            Console.Write("Digite o nome da marca: ");
+            string verificandoMarca = Console.ReadLine();
+            Marca = marcas.Find(item => item.NomeMarca == verificandoMarca );
+        }
+        public string Cadastrar(Produto produto)
         {
-            throw new NotImplementedException();
+            ListaDeProdutos.Add(produto);
+            return "Produto Cadastrado !!!";
         }
 
-        public string Deletar(Produto Produto)
+        public string Deletar(Produto produto)
         {
-            throw new NotImplementedException();
+            ListaDeProdutos.Remove(produto);
+            return "Produto deletado !!!";
         }
 
         public List<Produto> Listar()
         {
-            throw new NotImplementedException();
+            return ListaDeProdutos;
         }
     }
 }
