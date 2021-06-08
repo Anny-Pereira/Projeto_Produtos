@@ -7,18 +7,21 @@ namespace Projeto_Produtos_0706.Classes
     {
         private int Codigo { get; set; }
 
-        private string Nome { get; set; }
+        public string Nome { get; set; }
         
-        private string Email { get; set; }
+        public string Email { get; set; }
 
-        private string Senha { get; set; }
+        public string Senha { get; set; }
 
         private DateTime DataCadastro { get; set; }
         
         public int i;
 
-        public string Cadastrar(Usuario Usuario)
+        // public List<Usuario> ListaUsuario = new List<Usuario>();
+
+        public Usuario PegarInfo()
         {
+        
             i++;
 
             Usuario.Codigo = i;
@@ -34,11 +37,17 @@ namespace Projeto_Produtos_0706.Classes
             Console.Write("Insira sua senha: ");
             Usuario.Email = Console.ReadLine();
 
-            return "Usuario cadastrado!";
+        }
+
+        public string Cadastrar(Usuario Usuario)
+        {
+            // ListaUsuario.Add(Usuario);
+            return $"Usuario '{Usuario.Nome}' cadastrado!";
         }
 
         public string Deletar(Usuario Usuario)
         {
+            // ListaUsuario.Remove(Usuario)
             return $"Usário '{Usuario.Nome}' removido!";
         }
     }
