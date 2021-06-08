@@ -75,15 +75,15 @@ namespace Projeto_Produtos_0706.Classes
         }
 
         public List<Marca> Listar()
-        {
-            foreach (var M in marcas)
-            {
-                Console.WriteLine($@"
-    {M.DataCadastro}
-    {M.Codigo}
-    {M.NomeMarca}
-                ");
-            }
+        // {
+    //         foreach (var M in marcas)
+    //         {
+    //             Console.WriteLine($@"
+    // {M.DataCadastro}
+    // {M.Codigo}
+    // {M.NomeMarca}
+    //             ");
+    //         }
 
             return marcas;
         }
