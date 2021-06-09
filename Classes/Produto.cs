@@ -20,13 +20,13 @@ namespace Projeto_Produtos_0706.Classes
         {
             Codigo = IDcodigo;
             DataCadastro = DateTime.Now;
-            Console.WriteLine("Digite o nome do produto: ");
+            Console.Write("\nDigite o nome do produto: ");
             NomeProduto = Console.ReadLine();
-            Console.WriteLine("\nDigite o preço do produto: R$");
+            Console.Write("\nDigite o preço do produto: R$ ");
             Preco = float.Parse(Console.ReadLine());
 
             CadastradoPor = usuario;
-            Console.Write("Digite o nome da marca: ");
+            Console.Write("\nDigite o nome da marca: ");
             string VerificandoMarca = Console.ReadLine();
             marca = listaMarcas.Find(item => item.NomeMarca == VerificandoMarca);
         }
