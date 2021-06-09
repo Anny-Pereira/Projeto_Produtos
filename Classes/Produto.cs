@@ -13,7 +13,11 @@ namespace Projeto_Produtos_0706.Classes
 
         public float Preco { get; set; }
 
+<<<<<<< HEAD
         public DateTime DataCadastro { get; set; }
+=======
+        private DateTime DataCadastro = DateTime.Now;
+>>>>>>> a7703a488f6a5458e3d80c2293e347337e4c204f
 
        public Marca marca { get; set; } = new Marca();
        
@@ -31,30 +35,41 @@ namespace Projeto_Produtos_0706.Classes
         public void PegarInfo( string nomeLogado, List<Marca> marcas){
             int i = 0;
             i++;
+<<<<<<< HEAD
             Codigo = i;
 
             CadastradoPor.Nome = nomeLogado;
             
             Console.Write("Digite o nome do produto: ");
+=======
+            
+            Console.Write("\nDigite o nome do produto: ");
+>>>>>>> a7703a488f6a5458e3d80c2293e347337e4c204f
             NomeProduto = Console.ReadLine();
 
-            Console.Write("Digite o preço do produto: R$ ");
+            Console.Write("\nDigite o preço do produto: R$ ");
             Preco = float.Parse(Console.ReadLine());
             
             
-            Console.Write("Digite o nome da marca: ");
+            Console.Write("\nDigite o nome da marca: ");
             string verificandoMarca = Console.ReadLine();
             marca = marcas.Find(item => item.NomeMarca == verificandoMarca );
             
         }
         public string Cadastrar(Produto produto)
         {
+<<<<<<< HEAD
             ListaDeProdutos.Add(new Produto(Codigo, CadastradoPor.Nome, NomeProduto, marca));
             return "Produto Cadastrado !!!";
+=======
+            ListaDeProdutos.Add(produto);
+            return "\nProduto Cadastrado!\n";
+>>>>>>> a7703a488f6a5458e3d80c2293e347337e4c204f
         }
 
         public string Deletar(Produto produto)
         {
+<<<<<<< HEAD
             while (!RepDeletar)
             {
                 Console.WriteLine("\nDeseja deletar algum Produto (s-sim / n-não)?");
@@ -85,6 +100,10 @@ namespace Projeto_Produtos_0706.Classes
                 }
             }
             return "Produto deletado !!!";
+=======
+            ListaDeProdutos.Remove(produto);
+            return "\nProduto deletado!\n";
+>>>>>>> a7703a488f6a5458e3d80c2293e347337e4c204f
         }
 
         public List<Produto> Listar()
