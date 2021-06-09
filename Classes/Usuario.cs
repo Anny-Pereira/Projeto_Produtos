@@ -28,8 +28,12 @@ namespace Projeto_Produtos_0706.Classes
             i++;
 
             Codigo = i;
+<<<<<<< HEAD
             DataCadastro = DateTime.Now;
 
+=======
+            DataCadastro = DateTime.Now;       
+>>>>>>> 896c02180379a3516ce28486bf04572494604d2b
             Console.Write($"Data de cadastro: {DataCadastro}");
             
             Console.Write("\nInsira seu nome: ");

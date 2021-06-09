@@ -5,7 +5,7 @@ using Projeto_Produtos_0706.Interfaces;
 namespace Projeto_Produtos_0706.Classes
 {
     public class Marca : IMarca
-    {
+        {
         public int Codigo { get; set; }
 
         public string NomeMarca { get; set; }
@@ -31,7 +31,11 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write($"Data de cadastro: {DataCadastro}");
 
+<<<<<<< HEAD
             Console.Write($"\nCódigo da marca: {Codigo}");
+=======
+            Console.Write($"Código da marca: {Codigo}");
+>>>>>>> 896c02180379a3516ce28486bf04572494604d2b
 
 
             Console.Write("\n\nInsira o nome da marca: ");
