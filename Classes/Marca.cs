@@ -17,7 +17,7 @@ namespace Projeto_Produtos_0706.Classes
         public bool RepDeletar = false;
 
         public List<Marca> marcas = new List<Marca>();
-
+        private string retorno;
 
         public Marca(string nome){
             NomeMarca = nome;
@@ -30,7 +30,7 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write($"Data de cadastro: {DataCadastro}");
 
-            Console.Write($"Código da marca: {Codigo}");
+            Console.Write($"   Código da marca: {Codigo}");
 
 
             Console.Write("\nInsira o nome da marca: ");
@@ -48,37 +48,50 @@ namespace Projeto_Produtos_0706.Classes
 
         public string Deletar(Marca marca)
         {
-            while (!RepDeletar)
+            if (marcas.Count > 0)
             {
-                Console.WriteLine("\nDeseja deletar algum item (s-sim / n-não)?");
-                string RespDeletar = Console.ReadLine();
-
-                if (RespDeletar == "s")
+                while (!RepDeletar)
                 {
-                    RepDeletar = true;
-                    Console.WriteLine("\nQual marca deseja remover?");
-                    string MarcaDeletada = Console.ReadLine().ToLower();
+                    Console.WriteLine("\nDeseja deletar algum item (s-sim / n-não)?");
+                    string RespDeletar = Console.ReadLine();
 
-                    Marca MarcaEncontrada = marcas.Find(x => x.NomeMarca == MarcaDeletada);
+                    if (RespDeletar == "s")
+                    {
+                        RepDeletar = true;
+                        Console.WriteLine("\nQual marca deseja remover?");
+                        string MarcaDeletada = Console.ReadLine().ToLower();
 
-                    marcas.Remove(MarcaEncontrada);
+                        Marca MarcaEncontrada = marcas.Find(x => x.NomeMarca == MarcaDeletada);
+                        if (MarcaEncontrada != null)
+                        {
+                            marcas.Remove(MarcaEncontrada);
+                            retorno = "Marca deletada!";
+                        }
+                        else
+                        {
+                            retorno = "Não é possivel deletar uma marca inexistente";
+                        }
+                    }
+
+                    else if (RespDeletar == "n") 
+                    {
+                        RepDeletar = true;
+                    }
+
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        RepDeletar = false;
+                    }
                 }
-
-                else if (RespDeletar == "n") 
-                {
-                    RepDeletar = true;
-                }
-
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    RepDeletar = false;
-                }
+                
+            } else{
+                retorno = "Não existem marcas cadastradas";
             }
 
-            return "Marca deletada!";
+            return retorno;
         }
 
         public List<Marca> Listar()
@@ -86,6 +99,7 @@ namespace Projeto_Produtos_0706.Classes
             
             return marcas;
         }
+        
 
     }
 }
