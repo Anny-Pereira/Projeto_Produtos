@@ -41,8 +41,8 @@ namespace Projeto_Produtos_0706.Classes
 
         public Login()
         {
-            int opcao1;
-            int opcao2;
+            string opcao1;
+            string opcao2;
             int cont = 0;
             bool verificandoCadastro = false;
             Usuario usuario = new Usuario(); 
@@ -59,15 +59,15 @@ namespace Projeto_Produtos_0706.Classes
 [2] Fazer Login  
 
 R: ");
-                opcao1 = int.Parse(Console.ReadLine());
+                opcao1 = Console.ReadLine();
                 switch (opcao1)
                 {
-                    case 1:
+                    case "1":
                         usuario.PegarInfo();
                         Console.WriteLine(usuario.Cadastrar(usuario));
                         verificandoCadastro = true;
                         break;
-                    case 2:
+                    case "2":
                     
                         if ( verificandoCadastro == true )
                         {
@@ -89,28 +89,29 @@ R: ");
         [7] - Sair
         
         R: ");  
-                                    opcao2 = int.Parse(Console.ReadLine());
+                                    opcao2 = Console.ReadLine();
                                     switch (opcao2)
                                     {
-                                        case 1:
+                                        case "1":
                                             marca.PegarInfo();
                                             Console.WriteLine(marca.Cadastrar(marca));
                                             break;
-                                        case 2:
+                                        case "2":
                                             marca.Listar();
+                                            cont = 0;
                                             foreach (var M in marca.marcas){
                                                 cont++;
                                                 Console.WriteLine($"{cont} - {M.NomeMarca}");
                                             }
                                             break;
-                                        case 3:
+                                        case "3":
                                             marca.Deletar(marca);
                                             break;
-                                        case 4:
+                                        case "4":
                                             produto.PegarInfo(usuarioLogin, marca.marcas);
                                             Console.WriteLine(produto.Cadastrar(produto));
                                             break;
-                                        case 5:
+                                        case "5":
                                             produto.Listar();
                                             foreach (var P in produto.ListaDeProdutos){
                                                 Console.WriteLine($@"
@@ -122,12 +123,13 @@ Marca: {P.marca.NomeMarca}
 ");
                                             }
                                             break;
-                                        case 6:
+                                        case "6":
                                             break;
-                                        case 7:
+                                        case "7":
                                             sair = true;
                                             break;
                                         default:
+                                            Console.WriteLine("O valor digitado é invalido!!!");
                                             break;
                                     }
                                     
@@ -135,8 +137,13 @@ Marca: {P.marca.NomeMarca}
                                 } while (sair == false);
                                 
                             }
+                        }else{
+                            Console.WriteLine("Nenhum usuario foi cadastrado");
                         }
                         break;   
+                    default:
+                        Console.WriteLine("O valor digitado é invalido!!!");
+                        break;
                           
                     
                 }

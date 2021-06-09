@@ -30,7 +30,7 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write($"Data de cadastro: {DataCadastro}");
 
-            Console.Write($"Código da marca: {Codigo}");
+            Console.Write($"   Código da marca: {Codigo}");
 
 
             Console.Write("\nInsira o nome da marca: ");
