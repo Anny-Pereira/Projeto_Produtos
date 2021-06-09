@@ -10,7 +10,7 @@ namespace Projeto_Produtos_0706.Classes
 
         public string NomeMarca { get; set; }
 
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro = DateTime.Now;
 
         public int i;
 
@@ -19,10 +19,11 @@ namespace Projeto_Produtos_0706.Classes
         public List<Marca> marcas = new List<Marca>();
         private string retorno;
 
-        public Marca(string nome){
+        public Marca(string nome)
+        {
             NomeMarca = nome;
         }
-        public Marca(){}
+        public Marca() { }
         public void PegarInfo()
         {
             i++;
@@ -30,20 +31,21 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write($"Data de cadastro: {DataCadastro}");
 
-            Console.Write($"   Código da marca: {Codigo}");
+            Console.Write($"\nCódigo da marca: {Codigo}");
 
 
-            Console.Write("\nInsira o nome da marca: ");
-            NomeMarca = Console.ReadLine();
+            Console.Write("\n\nInsira o nome da marca: ");
+            NomeMarca = Console.ReadLine().ToLower();
 
         }
-        
+
 
         public string Cadastrar(Marca marca)
         {
             marcas.Add(new Marca(marca.NomeMarca));
 
-            return "Marca cadastrada!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            return "\nMarca cadastrada!";
         }
 
         public string Deletar(Marca marca)
@@ -65,15 +67,19 @@ namespace Projeto_Produtos_0706.Classes
                         if (MarcaEncontrada != null)
                         {
                             marcas.Remove(MarcaEncontrada);
-                            retorno = "Marca deletada!";
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            retorno = "\nMarca deletada!";
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                         else
                         {
-                            retorno = "Não é possivel deletar uma marca inexistente";
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            retorno = "\nNão é possivel deletar uma marca inexistente!";
+                            Console.ForegroundColor = ConsoleColor.White;
                         }
                     }
 
-                    else if (RespDeletar == "n") 
+                    else if (RespDeletar == "n")
                     {
                         RepDeletar = true;
                     }
@@ -86,9 +92,13 @@ namespace Projeto_Produtos_0706.Classes
                         RepDeletar = false;
                     }
                 }
-                
-            } else{
-                retorno = "Não existem marcas cadastradas";
+
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                retorno = "\nNão existem marcas cadastradas!";
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
             return retorno;
@@ -96,10 +106,10 @@ namespace Projeto_Produtos_0706.Classes
 
         public List<Marca> Listar()
         {
-            
+
             return marcas;
         }
-        
+
 
     }
 }

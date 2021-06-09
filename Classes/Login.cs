@@ -136,10 +136,10 @@ namespace Projeto_Produtos_0706.Classes
                                             break;
                                         case "4":
                                             Produto p = new Produto(IDproduto, usuario, marca.Listar());
-                                            if (produto.Cadastrar(p, marca.Listar(), IDproduto) == "\n Produto Cadastrado!") 
+                                            if (produto.Cadastrar(p, marca.Listar(), IDproduto) == "\nProduto Cadastrado!") 
                                             {
                                                 Console.ForegroundColor = ConsoleColor.Green;
-                                                Console.WriteLine("Produto cadastrado com sucesso!");
+                                                Console.WriteLine("\nProduto cadastrado com sucesso!");
                                                 IDproduto++;
                                                 Console.ResetColor();
                                             } else

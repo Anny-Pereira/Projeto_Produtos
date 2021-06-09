@@ -9,7 +9,7 @@ namespace Projeto_Produtos_0706.Classes
         public int Codigo { get; set; }
         public string NomeProduto { get; set; }
         public float Preco { get; set; }
-        public DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro = DateTime.Now;
         public Marca marca { get; set; }
         public Usuario CadastradoPor { get; set; }
         List<Produto> ListaDeProdutos = new List<Produto>();
@@ -22,14 +22,14 @@ namespace Projeto_Produtos_0706.Classes
         {
             Codigo = IDcodigo;
             DataCadastro = DateTime.Now;
-            Console.Write("\n Digite o nome do produto: ");
+            Console.Write("\nDigite o nome do produto: ");
             NomeProduto = Console.ReadLine();
-            Console.Write("Digite o preço do produto: R$");
+            Console.Write("Digite o preço do produto: R$ ");
             Preco = float.Parse(Console.ReadLine());
 
             CadastradoPor = usuario;
             Console.Write("Digite o nome da marca: ");
-            string VerificandoMarca = Console.ReadLine();
+            string VerificandoMarca = Console.ReadLine().ToLower();
             marca = listaMarcas.Find(item => item.NomeMarca == VerificandoMarca);
             
         }
@@ -42,12 +42,12 @@ namespace Projeto_Produtos_0706.Classes
                 {
                     ListaDeProdutos.Add(produto);
                     IDproduto++;
-                    return "\n Produto Cadastrado!";
+                    return "\nProduto Cadastrado!";
                 }
 
                 else
                 {
-                    return "Não foi possivel cadastrar pois a marca é inexistente";
+                    return "\nNão foi possivel cadastrar pois a marca é inexistente!";
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace Projeto_Produtos_0706.Classes
                         }
                         else
                         {
-                            retorno = "Não é possivel deletar uma produto inexistente";
+                            retorno = "\nNão é possivel deletar uma produto inexistente!";
                         }
                     }
 
@@ -94,7 +94,7 @@ namespace Projeto_Produtos_0706.Classes
                 }
                 
             } else{
-                retorno = "Não existem produtos cadastradas";
+                retorno = "\nNão existem produtos cadastradas!";
             }
 
             return retorno;
@@ -121,7 +121,9 @@ Marca: {item.marca.NomeMarca}");
 
             else
             {
-                Console.WriteLine("\n A lista está vazia!!!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nA lista está vazia!");
+                 Console.ForegroundColor = ConsoleColor.White;
             }
 
             Console.ResetColor();
