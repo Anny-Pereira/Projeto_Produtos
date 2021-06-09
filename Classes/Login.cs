@@ -8,7 +8,7 @@ namespace Projeto_Produtos_0706.Classes
     {
         private bool Logado { get; set; } = false;
         public string usuarioLogin;
-    
+
         public string Deslogar(Usuario usuario)
         {
             Logado = false;
@@ -20,7 +20,7 @@ namespace Projeto_Produtos_0706.Classes
             string retorno;
 
             Console.Write("Digite seu usuario: ");
-            
+
             usuarioLogin = Console.ReadLine();
 
             Console.Write("Digite sua senha: ");
@@ -45,20 +45,23 @@ namespace Projeto_Produtos_0706.Classes
             string opcao2;
             int cont = 0;
             bool verificandoCadastro = false;
-            Usuario usuario = new Usuario(); 
+            Usuario usuario = new Usuario();
             Marca marca = new Marca();
             Produto produto = new Produto();
             bool sair = false;
             List<Marca> marcas = new List<Marca>();
             do
             {
+                Console.ForegroundColor = ConsoleColor.Blue;
                 Console.Write($@"
-    Menu:
-
-[1] Cadastrar Usuario
-[2] Fazer Login  
-
-R: ");
+    =================================
+    |            Menu:              |
+    ---------------------------------
+    |    [1] Cadastrar Usuario      |
+    |    [2] Fazer Login            |
+    =================================
+             ");
+                Console.ForegroundColor = ConsoleColor.White;
                 opcao1 = Console.ReadLine();
                 switch (opcao1)
                 {
@@ -68,27 +71,29 @@ R: ");
                         verificandoCadastro = true;
                         break;
                     case "2":
-                    
-                        if ( verificandoCadastro == true )
+
+                        if (verificandoCadastro == true)
                         {
                             Console.WriteLine(Logar(usuario));
                             if (Logado == true)
                             {
                                 do
                                 {
-                                    
-                                    Console.Write($@"
-                MENU:
-
-        [1] - Cadastrar Marcas
-        [2] - Listar as Marcas cadastradas
-        [3] - Deletar Marca
-        [4] - Cadastrar produto
-        [5] - Listar produtos cadastrados
-        [6] - Deletar produtos
-        [7] - Sair
-        
-        R: ");  
+                                    Console.ForegroundColor = ConsoleColor.DarkBlue;
+                                    Console.WriteLine($@"
+    =============================================
+    |                   MENU:                   |
+    ---------------------------------------------
+    |    [1] - Cadastrar Marcas                 |
+    |    [2] - Listar as Marcas cadastradas     |
+    |    [3] - Deletar Marca                    |
+    |    [4] - Cadastrar produto                |
+    |    [5] - Listar produtos cadastrados      |
+    |    [6] - Deletar produtos                 |
+    |    [7] - Sair                             |
+    =============================================
+         ");
+                                    Console.ForegroundColor = ConsoleColor.White;
                                     opcao2 = Console.ReadLine();
                                     switch (opcao2)
                                     {
@@ -99,7 +104,8 @@ R: ");
                                         case "2":
                                             marca.Listar();
                                             cont = 0;
-                                            foreach (var M in marca.marcas){
+                                            foreach (var M in marca.marcas)
+                                            {
                                                 cont++;
                                                 Console.WriteLine($"{cont} - {M.NomeMarca}");
                                             }
@@ -113,14 +119,19 @@ R: ");
                                             break;
                                         case "5":
                                             produto.Listar();
-                                            foreach (var P in produto.ListaDeProdutos){
+                                            foreach (var P in produto.ListaDeProdutos)
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkCyan;
                                                 Console.WriteLine($@"
-Adicionado por {P.CadastradoPor.Nome}
-Id: {P.Codigo}
-Nome do produto: {P.NomeProduto}
-Preço: {P.Preco:C2}
-Marca: {P.marca.NomeMarca}
+    ====================================================
+    |    Adicionado por {P.CadastradoPor.Nome}
+    |    Id: {P.Codigo}
+    |    Nome do produto: {P.NomeProduto}
+    |    Preço: {P.Preco:C2}
+    |    Marca: {P.marca.NomeMarca}
+    ====================================================
 ");
+                                                Console.ForegroundColor = ConsoleColor.White;
                                             }
                                             break;
                                         case "6":
@@ -129,27 +140,35 @@ Marca: {P.marca.NomeMarca}
                                             sair = true;
                                             break;
                                         default:
-                                            Console.WriteLine("O valor digitado é invalido!!!");
+                                            Console.ForegroundColor = ConsoleColor.Red;
+                                            Console.WriteLine("\nO valor digitado é inválido!\n");
+                                            Console.ForegroundColor = ConsoleColor.White;
                                             break;
                                     }
-                                    
-                                    
+
+
                                 } while (sair == false);
-                                
+
                             }
-                        }else{
-                            Console.WriteLine("Nenhum usuario foi cadastrado");
                         }
-                        break;   
-                    default:
-                        Console.WriteLine("O valor digitado é invalido!!!");
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nNenhum usuário foi cadastrado!\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
                         break;
-                          
-                    
+                    default:
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nO valor digitado é inválido!\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        break;
+
+
                 }
-            }while (verificandoCadastro == true && sair == false);
+            } while (verificandoCadastro == true && sair == false);
 
         } //fim da funcao
     }
-            
+
 }
