@@ -14,7 +14,7 @@ namespace Projeto_Produtos_0706.Classes
 
         public string Senha { get; set; }
 
-        private DateTime DataCadastro { get; set; }
+        private DateTime DataCadastro = DateTime.Now;
         
         public int i;
 
@@ -26,7 +26,7 @@ namespace Projeto_Produtos_0706.Classes
 
             Codigo = i;
 
-            Console.Write($"Data de cadastro: {DataCadastro}");
+            Console.Write($"\nData de cadastro: {DataCadastro}");
             
             Console.Write("\nInsira seu nome: ");
             Nome = Console.ReadLine();
@@ -41,13 +41,13 @@ namespace Projeto_Produtos_0706.Classes
         public string Cadastrar(Usuario usuario)
         {
             ListaUsuario.Add(usuario);
-            return "Usuario cadastrado!";
+            return "\nUsuario cadastrado!\n";
         }
 
         public string Deletar(Usuario usuario)
         {
             ListaUsuario.Remove(usuario);
-            return $"Usário '{usuario.Nome}' removido!";
+            return $"\nUsário '{usuario.Nome}' removido!\n";
         }
     }
 }
