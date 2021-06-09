@@ -5,30 +5,31 @@ using Projeto_Produtos_0706.Interfaces;
 namespace Projeto_Produtos_0706.Classes
 {
     public class Marca : IMarca
-    {
+        {
         public int Codigo { get; set; }
 
         public string NomeMarca { get; set; }
 
-        public DateTime DataCadastro = DateTime.Now;
+        public DateTime DataCadastro { get; set; }
 
         public int i;
 
         public bool RepDeletar = false;
 
         public List<Marca> marcas = new List<Marca>();
+        private string retorno;
 
-
-        public Marca(string nome){
+        public Marca(string nome)
+        {
             NomeMarca = nome;
         }
-        public Marca(){}
+        public Marca() { }
         public void PegarInfo()
         {
             i++;
             Codigo = i;
 
-            Console.Write($"\nData de cadastro: {DataCadastro}");
+            Console.Write($"Data de cadastro: {DataCadastro}");
 
             Console.Write($"Código da marca: {Codigo}");
 
@@ -37,55 +38,78 @@ namespace Projeto_Produtos_0706.Classes
             NomeMarca = Console.ReadLine();
 
         }
-        
+
 
         public string Cadastrar(Marca marca)
         {
             marcas.Add(new Marca(marca.NomeMarca));
 
-            return "\nMarca cadastrada!\n";
+            Console.ForegroundColor = ConsoleColor.Green;
+            return "\nMarca cadastrada!";
         }
 
         public string Deletar(Marca marca)
         {
-            while (!RepDeletar)
+            if (marcas.Count > 0)
             {
-                Console.WriteLine("\nDeseja deletar algum item (s-sim / n-não)?");
-                string RespDeletar = Console.ReadLine();
-
-                if (RespDeletar == "s")
+                while (!RepDeletar)
                 {
-                    RepDeletar = true;
-                    Console.WriteLine("\nQual marca deseja remover?");
-                    string MarcaDeletada = Console.ReadLine().ToLower();
+                    Console.WriteLine("\nDeseja deletar algum item (s-sim / n-não)?");
+                    string RespDeletar = Console.ReadLine();
 
-                    Marca MarcaEncontrada = marcas.Find(x => x.NomeMarca == MarcaDeletada);
+                    if (RespDeletar == "s")
+                    {
+                        RepDeletar = true;
+                        Console.WriteLine("\nQual marca deseja remover?");
+                        string MarcaDeletada = Console.ReadLine().ToLower();
 
-                    marcas.Remove(MarcaEncontrada);
+                        Marca MarcaEncontrada = marcas.Find(x => x.NomeMarca == MarcaDeletada);
+                        if (MarcaEncontrada != null)
+                        {
+                            marcas.Remove(MarcaEncontrada);
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            retorno = "\nMarca deletada!";
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            retorno = "\nNão é possivel deletar uma marca inexistente!";
+                            Console.ForegroundColor = ConsoleColor.White;
+                        }
+                    }
+
+                    else if (RespDeletar == "n")
+                    {
+                        RepDeletar = true;
+                    }
+
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        RepDeletar = false;
+                    }
                 }
 
-                else if (RespDeletar == "n") 
-                {
-                    RepDeletar = true;
-                }
-
-                else
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    RepDeletar = false;
-                }
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                retorno = "\nNão existem marcas cadastradas!";
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
-            return "\nMarca deletada!\n";
+            return retorno;
         }
 
         public List<Marca> Listar()
         {
-            
+
             return marcas;
         }
+
 
     }
 }
