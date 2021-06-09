@@ -27,7 +27,11 @@ namespace Projeto_Produtos_0706.Classes
             Console.Write("Digite sua senha: ");
             string senhaLogin = Console.ReadLine();
 
-            if (usuarioLogin == usuario.Nome && senhaLogin == usuario.Senha)
+            List<Usuario> verificarUsuario = usuario.RetornarLista() ;
+            string verificandoUser = verificarUsuario.Find(item => item.Nome == usuarioLogin).Nome;
+            string verificandoSenha = verificarUsuario.Find(item => item.Senha == senhaLogin).Senha;
+            Console.WriteLine(verificandoUser + "                                  "+ verificandoSenha);
+            if (usuarioLogin == verificandoUser && senhaLogin == verificandoSenha)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 retorno = "\nUsuário logado com sucesso!";
@@ -55,7 +59,7 @@ namespace Projeto_Produtos_0706.Classes
             Marca marca = new Marca();
             Produto produto = new Produto();
             bool sair = false;
-            List<Marca> marcas = new List<Marca>();
+            //List<Marca> marcas = new List<Marca>();
 
             do
             {
@@ -66,6 +70,7 @@ namespace Projeto_Produtos_0706.Classes
     ---------------------------------
     |    [1] Cadastrar Usuario      |
     |    [2] Fazer Login            |
+    |    [3] Deletar Usuario        |
     =================================
              ");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -109,14 +114,14 @@ namespace Projeto_Produtos_0706.Classes
                                             Console.WriteLine(marca.Cadastrar(marca));
                                             break;
                                         case "2":
-                                            if (marcas.Count > 0)
+                                            if (marca.marcas.Count > 0)
                                             {
                                                 marca.Listar();
                                                 cont = 0;
                                                 foreach (var M in marca.marcas)
                                                 {
                                                     cont++;
-                                                    Console.WriteLine($"{cont} \n {M.NomeMarca}");
+                                                    Console.WriteLine($"{cont} - {M.NomeMarca}");
                                                 }
                                             }
                                             else
@@ -131,12 +136,17 @@ namespace Projeto_Produtos_0706.Classes
                                             break;
                                         case "4":
                                             Produto p = new Produto(IDproduto, usuario, marca.Listar());
-                                            if (produto.Cadastrar(p, marca.Listar(), IDproduto) == "\n Produto Cadastrado!") //Cria um produto e verifica se a marca existe
+                                            if (produto.Cadastrar(p, marca.Listar(), IDproduto) == "\n Produto Cadastrado!") 
                                             {
                                                 Console.ForegroundColor = ConsoleColor.Green;
                                                 Console.WriteLine("Produto cadastrado com sucesso!");
                                                 IDproduto++;
                                                 Console.ResetColor();
+                                            } else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("Houve um erro e o produto não foi cadastrado");
+                                                Console.ForegroundColor = ConsoleColor.White;
                                             }
                                             break;
                                         case "5":
@@ -144,14 +154,8 @@ namespace Projeto_Produtos_0706.Classes
 
                                             break;
                                         case "6":
-                                            Console.Write("Digite o produto que deseja apagar: ");
-                                            string produtoApagar = Console.ReadLine();
-                                            List<Produto> procurarProdutos = produto.ListarExistentes();
-
-                                            Produto existe = procurarProdutos.Find(item => item.NomeProduto == produtoApagar);
-
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                                            Console.WriteLine(produto.Deletar(existe));
+                                            Console.WriteLine(produto.Deletar(produto));
                                             Console.ResetColor();
                                             break;
                                         case "7":
@@ -170,6 +174,33 @@ namespace Projeto_Produtos_0706.Classes
 
                                 } while (sair == false);
 
+                            }
+                        }
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nNenhum usuário foi cadastrado!\n");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            sair = false;
+                        }
+                        break;
+                    case "3":
+                        Console.Write("Digite o usuario que deseja apagar: ");
+                        string UsuarioApagar = Console.ReadLine();
+                        List<Usuario> procurarUsuario = usuario.RetornarLista() ;
+                        if (procurarUsuario.Count > 0)
+                        {
+                            Usuario temp = procurarUsuario.Find(item => item.Nome == UsuarioApagar);
+                            if (temp != null)
+                            {
+                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                Console.WriteLine(usuario.Deletar(temp));
+                                Console.ResetColor();
+                                sair = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Esse usuario não existe!!!");
                             }
                         }
                         else

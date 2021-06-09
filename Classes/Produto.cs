@@ -13,6 +13,8 @@ namespace Projeto_Produtos_0706.Classes
         public Marca marca { get; set; }
         public Usuario CadastradoPor { get; set; }
         List<Produto> ListaDeProdutos = new List<Produto>();
+        public bool RepDeletar = false;
+        public string retorno = "";
 
         public Produto(){}
 
@@ -20,15 +22,16 @@ namespace Projeto_Produtos_0706.Classes
         {
             Codigo = IDcodigo;
             DataCadastro = DateTime.Now;
-            Console.WriteLine("Digite o nome do produto: ");
+            Console.Write("\n Digite o nome do produto: ");
             NomeProduto = Console.ReadLine();
-            Console.WriteLine("\nDigite o preço do produto: R$");
+            Console.Write("Digite o preço do produto: R$");
             Preco = float.Parse(Console.ReadLine());
 
             CadastradoPor = usuario;
             Console.Write("Digite o nome da marca: ");
             string VerificandoMarca = Console.ReadLine();
             marca = listaMarcas.Find(item => item.NomeMarca == VerificandoMarca);
+            
         }
 
         public string Cadastrar(Produto produto, List<Marca> listaMarcas, int IDproduto)
@@ -51,8 +54,50 @@ namespace Projeto_Produtos_0706.Classes
 
         public string Deletar(Produto produto)
         {
-            ListaDeProdutos.Remove(produto);
-            return "\n Produto deletado!";
+            if (ListaDeProdutos.Count > 0)
+            {
+                while (!RepDeletar)
+                {
+                    Console.WriteLine("\nDeseja deletar algum item (s-sim / n-não)?");
+                    string RespDeletar = Console.ReadLine();
+
+                    if (RespDeletar == "s")
+                    {
+                        RepDeletar = true;
+                        Console.WriteLine("\nQual produto deseja remover?");
+                        string produtoDeletado = Console.ReadLine();
+
+                        Produto produtoEncontrado = ListaDeProdutos.Find(x => x.NomeProduto == produtoDeletado);
+                        if (produtoEncontrado != null)
+                        {
+                            ListaDeProdutos.Remove(produtoEncontrado);
+                            retorno = "Produto deletado!";
+                        }
+                        else
+                        {
+                            retorno = "Não é possivel deletar uma produto inexistente";
+                        }
+                    }
+
+                    else if (RespDeletar == "n") 
+                    {
+                        RepDeletar = true;
+                    }
+
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        RepDeletar = false;
+                    }
+                }
+                
+            } else{
+                retorno = "Não existem produtos cadastradas";
+            }
+
+            return retorno;
         }
 
         public void Listar()
@@ -65,18 +110,18 @@ namespace Projeto_Produtos_0706.Classes
                 foreach (Produto item in ListaDeProdutos)
                 {
                     Console.WriteLine($@"
-                    Cadastrado Por: {item.CadastradoPor.Nome}
-                    Código: {item.Codigo}
-                    Nome do produto: {item.NomeProduto}
-                    Preço: {item.Preco:C2}
-                    Data de cadastro: {item.DataCadastro}
-                    Marca: {item.marca.NomeMarca}");
+Cadastrado Por: {item.CadastradoPor.Nome}
+Código: {item.Codigo}
+Nome do produto: {item.NomeProduto}
+Preço: {item.Preco:C2}
+Data de cadastro: {item.DataCadastro}
+Marca: {item.marca.NomeMarca}");
                 }
             }
 
             else
             {
-                Console.WriteLine("A lista está vazia!!!");
+                Console.WriteLine("\n A lista está vazia!!!");
             }
 
             Console.ResetColor();
