@@ -111,7 +111,7 @@ namespace Projeto_Produtos_0706.Classes
                                             }
                                             break;
                                         case "3":
-                                            marca.Deletar(marca);
+                                            Console.WriteLine(marca.Deletar(marca));
                                             break;
                                         case "4":
                                             produto.PegarInfo(usuarioLogin, marca.marcas);
@@ -135,6 +135,7 @@ namespace Projeto_Produtos_0706.Classes
                                             }
                                             break;
                                         case "6":
+                                            Console.WriteLine(produto.Deletar(produto));
                                             break;
                                         case "7":
                                             sair = true;
