@@ -78,7 +78,7 @@ namespace Projeto_Produtos_0706.Classes
                 }
             }
 
-            return "Marca deletada!";
+            return "\nMarca deletada!\n";
         }
 
         public List<Marca> Listar()
