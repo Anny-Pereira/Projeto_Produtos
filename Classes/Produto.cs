@@ -12,7 +12,7 @@ namespace Projeto_Produtos_0706.Classes
 
         private float Preco { get; set; }
 
-        private DateTime DataCadastro { get; set; }
+        private DateTime DataCadastro = DateTime.Now;
 
        private Marca Marca { get; set; }
        
@@ -25,31 +25,29 @@ namespace Projeto_Produtos_0706.Classes
             int i = 0;
             i++;
             
-            
-            
-            Console.Write("Digite o nome do produto: ");
+            Console.Write("\nDigite o nome do produto: ");
             NomeProduto = Console.ReadLine();
 
-            Console.Write("Digite o preço do produto: R$ ");
+            Console.Write("\nDigite o preço do produto: R$ ");
             Preco = float.Parse(Console.ReadLine());
 
             
             CadastradoPor = ListaUsuarios.Find(item => item.Nome == nomeLogado);
             
-            Console.Write("Digite o nome da marca: ");
+            Console.Write("\nDigite o nome da marca: ");
             string verificandoMarca = Console.ReadLine();
             Marca = marcas.Find(item => item.NomeMarca == verificandoMarca );
         }
         public string Cadastrar(Produto produto)
         {
             ListaDeProdutos.Add(produto);
-            return "Produto Cadastrado !!!";
+            return "\nProduto Cadastrado!\n";
         }
 
         public string Deletar(Produto produto)
         {
             ListaDeProdutos.Remove(produto);
-            return "Produto deletado !!!";
+            return "\nProduto deletado!\n";
         }
 
         public List<Produto> Listar()
