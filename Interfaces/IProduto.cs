@@ -5,9 +5,9 @@ namespace Projeto_Produtos_0706.Interfaces
 {
     public interface IProduto
     {
-        public string Cadastrar(Produto produto);
+        public string Cadastrar(Produto produto, List<Marca> listaMarcas, int IDproduto);
 
-        public List<Produto> Listar();
+        public void Listar();
 
         public string Deletar(Produto Produto);
                 

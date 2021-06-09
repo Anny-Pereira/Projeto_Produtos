@@ -49,6 +49,7 @@ namespace Projeto_Produtos_0706.Classes
             string opcao1;
             string opcao2;
             int cont = 0;
+            int IDproduto = 1;
             bool verificandoCadastro = false;
             Usuario usuario = new Usuario();
             Marca marca = new Marca();
@@ -129,28 +130,29 @@ namespace Projeto_Produtos_0706.Classes
                                             Console.WriteLine(marca.Deletar(marca));
                                             break;
                                         case "4":
-                                            produto.PegarInfo(usuarioLogin, marca.marcas);
-                                            Console.WriteLine(produto.Cadastrar(produto));
+                                            Produto p = new Produto(IDproduto, usuario, marca.Listar());
+                                            if (produto.Cadastrar(p, marca.Listar(), IDproduto) == "\n Produto Cadastrado!") //Cria um produto e verifica se a marca existe
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Green;
+                                                Console.WriteLine("Produto cadastrado com sucesso!");
+                                                IDproduto++;
+                                                Console.ResetColor();
+                                            }
                                             break;
                                         case "5":
                                             produto.Listar();
-                                            foreach (var P in produto.ListaDeProdutos)
-                                            {
-                                                Console.ForegroundColor = ConsoleColor.DarkCyan;
-                                                Console.WriteLine($@"
-    ====================================================
-    |    Adicionado por {P.CadastradoPor.Nome}
-    |    Id: {P.Codigo}
-    |    Nome do produto: {P.NomeProduto}
-    |    Preço: {P.Preco:C2}
-    |    Marca: {P.marca.NomeMarca}
-    ====================================================
-");
-                                                Console.ForegroundColor = ConsoleColor.White;
-                                            }
+
                                             break;
                                         case "6":
-                                            Console.WriteLine(produto.Deletar(produto));
+                                            Console.Write("Digite o produto que deseja apagar: ");
+                                            string produtoApagar = Console.ReadLine();
+                                            List<Produto> procurarProdutos = produto.ListarExistentes();
+
+                                            Produto existe = procurarProdutos.Find(item => item.NomeProduto == produtoApagar);
+
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine(produto.Deletar(existe));
+                                            Console.ResetColor();
                                             break;
                                         case "7":
                                             sair = true;
