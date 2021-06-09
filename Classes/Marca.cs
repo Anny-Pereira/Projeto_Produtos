@@ -6,40 +6,47 @@ namespace Projeto_Produtos_0706.Classes
 {
     public class Marca : IMarca
     {
-        private int Codigo { get; set; }
+        public int Codigo { get; set; }
 
-        private string NomeMarca { get; set; }
+        public string NomeMarca { get; set; }
 
-        private DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro = DateTime.Now;
 
         public int i;
 
-        private bool RepDeletar = false;
+        public bool RepDeletar = false;
 
-        List<Marca> marcas = new List<Marca>();
+        public List<Marca> marcas = new List<Marca>();
 
-        public string Cadastrar(Marca Marca)
+
+        public Marca(string nome){
+            NomeMarca = nome;
+        }
+        public Marca(){}
+        public void PegarInfo()
         {
-            Marca marca = new Marca();
-
             i++;
-            marca.Codigo = i;
+            Codigo = i;
 
-            Console.Write($"Data de cadastro: {DataCadastro}");
+            Console.Write($"\nData de cadastro: {DataCadastro}");
 
-            Console.Write($"Código da marca: {marca.Codigo}");
+            Console.Write($"Código da marca: {Codigo}");
 
 
             Console.Write("\nInsira o nome da marca: ");
-            marca.NomeMarca = Console.ReadLine();
+            NomeMarca = Console.ReadLine();
 
+        }
+        
 
-            marcas.Add(marca);
+        public string Cadastrar(Marca marca)
+        {
+            marcas.Add(new Marca(marca.NomeMarca));
 
-            return "Marca cadastrada!";
+            return "\nMarca cadastrada!\n";
         }
 
-        public string Deletar(Marca Marca)
+        public string Deletar(Marca marca)
         {
             while (!RepDeletar)
             {
@@ -76,16 +83,9 @@ namespace Projeto_Produtos_0706.Classes
 
         public List<Marca> Listar()
         {
-            foreach (var M in marcas)
-            {
-                Console.WriteLine($@"
-    {M.DataCadastro}
-    {M.Codigo}
-    {M.NomeMarca}
-                ");
-            }
-
+            
             return marcas;
         }
+
     }
 }
