@@ -28,10 +28,10 @@ namespace Projeto_Produtos_0706.Classes
             string senhaLogin = Console.ReadLine();
 
             List<Usuario> verificarUsuario = usuario.RetornarLista() ;
-            string verificandoUser = verificarUsuario.Find(item => item.Nome == usuarioLogin).Nome;
-            string verificandoSenha = verificarUsuario.Find(item => item.Senha == senhaLogin).Senha;
-            Console.WriteLine(verificandoUser + "                                  "+ verificandoSenha);
-            if (usuarioLogin == verificandoUser && senhaLogin == verificandoSenha)
+
+            Usuario userEncontrado = verificarUsuario.Find(x => x.Nome == usuarioLogin && x.Senha == senhaLogin);
+
+            if (userEncontrado != null)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 retorno = "\nUsuário logado com sucesso!";
