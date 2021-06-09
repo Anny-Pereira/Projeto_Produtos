@@ -40,6 +40,7 @@ namespace Projeto_Produtos_0706.Classes
             if (Logado == true)
             {
                 int opcao;
+                
                 Console.Write("Opções e tals");
                 opcao = int.Parse(Console.ReadLine());
             }
