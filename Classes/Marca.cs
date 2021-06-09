@@ -18,7 +18,12 @@ namespace Projeto_Produtos_0706.Classes
 
         public List<Marca> marcas = new List<Marca>();
 
-        public Marca()
+
+        public Marca(string nome){
+            NomeMarca = nome;
+        }
+        public Marca(){}
+        public void PegarInfo()
         {
             i++;
             Codigo = i;
@@ -36,7 +41,7 @@ namespace Projeto_Produtos_0706.Classes
 
         public string Cadastrar(Marca marca)
         {
-            marcas.Add(marca);
+            marcas.Add(new Marca(marca.NomeMarca));
 
             return "Marca cadastrada!";
         }
@@ -78,12 +83,9 @@ namespace Projeto_Produtos_0706.Classes
 
         public List<Marca> Listar()
         {
-            foreach (var M in marcas)
-            {
-                
-            }
-
+            
             return marcas;
         }
+
     }
 }

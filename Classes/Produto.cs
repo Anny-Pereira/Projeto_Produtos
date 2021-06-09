@@ -6,49 +6,84 @@ namespace Projeto_Produtos_0706.Classes
 {
     public class Produto : IProduto
     {
-        private int Codigo { get; set; }
+        public int Codigo { get; set; }
+        public bool RepDeletar = false;
 
-        private string NomeProduto { get; set; }
+        public string NomeProduto { get; set; }
 
-        private float Preco { get; set; }
+        public float Preco { get; set; }
 
-        private DateTime DataCadastro { get; set; }
+        public DateTime DataCadastro { get; set; }
 
-       private Marca Marca { get; set; }
+       public Marca marca { get; set; } = new Marca();
        
-        private Usuario CadastradoPor { get; set; }
+        public Usuario CadastradoPor { get; set; } = new Usuario();
         
-       private List<Produto> ListaDeProdutos { get; set; }
+       public List<Produto> ListaDeProdutos { get; set; }
        
 
-        public Produto( string nomeLogado, List<Marca> marcas, List<Usuario> ListaUsuarios){
+        public Produto(){}
+        public Produto(int Codigo, string CadastradoPor, string NomeProduto, Marca marca){
+            this.Codigo = Codigo;
+            this.CadastradoPor.Nome = CadastradoPor;
+            this.marca = marca;
+        }
+        public void PegarInfo( string nomeLogado, List<Marca> marcas){
             int i = 0;
             i++;
-            
-            
+            Codigo = i;
+
+            CadastradoPor.Nome = nomeLogado;
             
             Console.Write("Digite o nome do produto: ");
             NomeProduto = Console.ReadLine();
 
             Console.Write("Digite o preço do produto: R$ ");
             Preco = float.Parse(Console.ReadLine());
-
             
-            CadastradoPor = ListaUsuarios.Find(item => item.Nome == nomeLogado);
             
             Console.Write("Digite o nome da marca: ");
             string verificandoMarca = Console.ReadLine();
-            Marca = marcas.Find(item => item.NomeMarca == verificandoMarca );
+            marca = marcas.Find(item => item.NomeMarca == verificandoMarca );
+            
         }
         public string Cadastrar(Produto produto)
         {
-            ListaDeProdutos.Add(produto);
+            ListaDeProdutos.Add(new Produto(Codigo, CadastradoPor.Nome, NomeProduto, marca));
             return "Produto Cadastrado !!!";
         }
 
         public string Deletar(Produto produto)
         {
-            ListaDeProdutos.Remove(produto);
+            while (!RepDeletar)
+            {
+                Console.WriteLine("\nDeseja deletar algum Produto (s-sim / n-não)?");
+                string RespDeletar = Console.ReadLine();
+
+                if (RespDeletar == "s")
+                {
+                    RepDeletar = true;
+                    Console.WriteLine("\nQual Produto deseja remover?");
+                    string ProdutoDeletado = Console.ReadLine().ToLower();
+
+                    Produto produtoEncontrado = ListaDeProdutos.Find(x => x.NomeProduto == ProdutoDeletado);
+
+                    ListaDeProdutos.Remove(produtoEncontrado);
+                }
+
+                else if (RespDeletar == "n") 
+                {
+                    RepDeletar = true;
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("\nNenhuma opção identificada. Tente novamente!\n");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    RepDeletar = false;
+                }
+            }
             return "Produto deletado !!!";
         }
 

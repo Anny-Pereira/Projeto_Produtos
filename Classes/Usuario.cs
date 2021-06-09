@@ -20,7 +20,10 @@ namespace Projeto_Produtos_0706.Classes
 
         public List<Usuario> ListaUsuario = new List<Usuario>();
 
-        public Usuario()
+        // public Usuario(){
+
+        // }
+        public void PegarInfo()
         {
             i++;
 
@@ -48,6 +51,11 @@ namespace Projeto_Produtos_0706.Classes
         {
             ListaUsuario.Remove(usuario);
             return $"Usário '{usuario.Nome}' removido!";
+        }
+
+        public List<Usuario> RetornarLista(){
+
+            return ListaUsuario;
         }
     }
 }
