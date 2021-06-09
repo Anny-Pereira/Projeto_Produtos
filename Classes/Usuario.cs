@@ -1,26 +1,32 @@
 using System;
+using System.Collections.Generic;
 using Projeto_Produtos_0706.Interfaces;
 
 namespace Projeto_Produtos_0706.Classes
 {
     public class Usuario : IUsuario
     {
-        private int Codigo { get; set; }
+        public int Codigo { get; set; }
 
-        public string Nome { get; private set; }
+        public string Nome { get; set; }
         
-        private string Email { get; set; }
+        public string Email { get; set; }
 
-        public string Senha { get; private set; }
+        public string Senha { get; set; }
 
         private DateTime DataCadastro { get; set; }
         
         public int i;
 
-        public string Cadastrar(string usuario)
+        public List<Usuario> ListaUsuario = new List<Usuario>();
+
+        // public Usuario(){
+
+        // }
+        public void PegarInfo()
         {
             i++;
-            
+
             Codigo = i;
 
             Console.Write($"Data de cadastro: {DataCadastro}");
@@ -33,13 +39,23 @@ namespace Projeto_Produtos_0706.Classes
 
             Console.Write("Insira sua senha: ");
             Senha = Console.ReadLine();
+        }
 
+        public string Cadastrar(Usuario usuario)
+        {
+            ListaUsuario.Add(usuario);
             return "Usuario cadastrado!";
         }
 
-        public string Deletar(Usuario Usuario)
+        public string Deletar(Usuario usuario)
         {
-            return $"Usuario '{Nome}' removido!";
+            ListaUsuario.Remove(usuario);
+            return $"Usário '{usuario.Nome}' removido!";
+        }
+
+        public List<Usuario> RetornarLista(){
+
+            return ListaUsuario;
         }
     }
 }
