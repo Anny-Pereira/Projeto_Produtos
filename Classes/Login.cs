@@ -12,14 +12,14 @@ namespace Projeto_Produtos_0706.Classes
         public string Deslogar(Usuario usuario)
         {
             Logado = false;
-            return "Você deslogou com sucesso!!!";
+            return "\nVocê deslogou com sucesso!";
         }
 
         public string Logar(Usuario usuario)
         {
             string retorno;
 
-            Console.Write("Digite seu usuario: ");
+            Console.Write("\nDigite seu usuário: ");
 
             usuarioLogin = Console.ReadLine();
 
@@ -28,12 +28,14 @@ namespace Projeto_Produtos_0706.Classes
 
             if (usuarioLogin == usuario.Nome && senhaLogin == usuario.Senha)
             {
-                retorno = "Usuario Logado com sucesso!!!";
+                retorno = "\nUsuário logado com sucesso!";
                 Logado = true;
             }
             else
             {
-                retorno = "Algo deu errado verifique as informações digitadas";
+                Console.ForegroundColor = ConsoleColor.Red;
+                retorno = "\nAlgo deu errado. Verifique as informações digitadas!";
+                Console.ForegroundColor = ConsoleColor.White;
                 Logado = false;
             }
             return retorno;
@@ -107,7 +109,7 @@ namespace Projeto_Produtos_0706.Classes
                                             foreach (var M in marca.marcas)
                                             {
                                                 cont++;
-                                                Console.WriteLine($"{cont} - {M.NomeMarca}");
+                                                Console.WriteLine($"{cont} \n {M.NomeMarca}");
                                             }
                                             break;
                                         case "3":
@@ -139,6 +141,11 @@ namespace Projeto_Produtos_0706.Classes
                                             break;
                                         case "7":
                                             sair = true;
+                                            verificandoCadastro = false;
+                                            Console.ForegroundColor = ConsoleColor.Green;
+                                            Console.WriteLine("\nVocê saiu com sucesso!\n");
+                                            Console.ForegroundColor = ConsoleColor.White;
+
                                             break;
                                         default:
                                             Console.ForegroundColor = ConsoleColor.Red;
@@ -157,17 +164,19 @@ namespace Projeto_Produtos_0706.Classes
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("\nNenhum usuário foi cadastrado!\n");
                             Console.ForegroundColor = ConsoleColor.White;
+                            sair = false;
                         }
                         break;
                     default:
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("\nO valor digitado é inválido!\n");
                         Console.ForegroundColor = ConsoleColor.White;
+                        sair = false;
                         break;
 
 
                 }
-            } while (verificandoCadastro == true && sair == false);
+            } while (verificandoCadastro == true || sair == false);
 
         } //fim da funcao
     }
