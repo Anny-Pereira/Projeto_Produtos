@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Projeto_Produtos_0706.Interfaces;
 
 namespace Projeto_Produtos_0706.Classes
