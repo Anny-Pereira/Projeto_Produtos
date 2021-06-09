@@ -145,7 +145,7 @@ namespace Projeto_Produtos_0706.Classes
                                             } else
                                             {
                                                 Console.ForegroundColor = ConsoleColor.Red;
-                                                Console.WriteLine("Houve um erro e o produto não foi cadastrado");
+                                                Console.WriteLine("Houve um erro e o produto não foi cadastrado, é necessario cadastrar uma marca antes de cadastrar um produto");
                                                 Console.ForegroundColor = ConsoleColor.White;
                                             }
                                             break;
