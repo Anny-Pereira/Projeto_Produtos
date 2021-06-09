@@ -44,12 +44,14 @@ namespace Projeto_Produtos_0706.Classes
         public string Cadastrar(Usuario usuario)
         {
             ListaUsuario.Add(usuario);
-            return "Usuario cadastrado!";
+            Console.ForegroundColor = ConsoleColor.Green;
+            return "\nUsuário cadastrado!";
         }
 
         public string Deletar(Usuario usuario)
         {
             ListaUsuario.Remove(usuario);
+            Console.ForegroundColor = ConsoleColor.Cyan;
             return $"Usário '{usuario.Nome}' removido!";
         }
 

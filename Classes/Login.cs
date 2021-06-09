@@ -12,6 +12,7 @@ namespace Projeto_Produtos_0706.Classes
         public string Deslogar(Usuario usuario)
         {
             Logado = false;
+            Console.ForegroundColor = ConsoleColor.Green;
             return "\nVocê deslogou com sucesso!";
         }
 
@@ -28,7 +29,9 @@ namespace Projeto_Produtos_0706.Classes
 
             if (usuarioLogin == usuario.Nome && senhaLogin == usuario.Senha)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 retorno = "\nUsuário logado com sucesso!";
+                Console.ForegroundColor = ConsoleColor.White;
                 Logado = true;
             }
             else
@@ -52,6 +55,7 @@ namespace Projeto_Produtos_0706.Classes
             Produto produto = new Produto();
             bool sair = false;
             List<Marca> marcas = new List<Marca>();
+
             do
             {
                 Console.ForegroundColor = ConsoleColor.Blue;
@@ -92,7 +96,7 @@ namespace Projeto_Produtos_0706.Classes
     |    [4] - Cadastrar produto                |
     |    [5] - Listar produtos cadastrados      |
     |    [6] - Deletar produtos                 |
-    |    [7] - Sair                             |
+    |    [7] - Deslogar                         |
     =============================================
          ");
                                     Console.ForegroundColor = ConsoleColor.White;
@@ -104,12 +108,21 @@ namespace Projeto_Produtos_0706.Classes
                                             Console.WriteLine(marca.Cadastrar(marca));
                                             break;
                                         case "2":
-                                            marca.Listar();
-                                            cont = 0;
-                                            foreach (var M in marca.marcas)
+                                            if (marcas.Count > 0)
                                             {
-                                                cont++;
-                                                Console.WriteLine($"{cont} \n {M.NomeMarca}");
+                                                marca.Listar();
+                                                cont = 0;
+                                                foreach (var M in marca.marcas)
+                                                {
+                                                    cont++;
+                                                    Console.WriteLine($"{cont} \n {M.NomeMarca}");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.Red;
+                                                Console.WriteLine("\nNão há nehuma marca cadastrada para listar!");
+                                                Console.ForegroundColor = ConsoleColor.White;
                                             }
                                             break;
                                         case "3":
@@ -142,9 +155,7 @@ namespace Projeto_Produtos_0706.Classes
                                         case "7":
                                             sair = true;
                                             verificandoCadastro = false;
-                                            Console.ForegroundColor = ConsoleColor.Green;
-                                            Console.WriteLine("\nVocê saiu com sucesso!\n");
-                                            Console.ForegroundColor = ConsoleColor.White;
+                                            Console.WriteLine(Deslogar(usuario));
 
                                             break;
                                         default:
