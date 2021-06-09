@@ -39,12 +39,12 @@ namespace Projeto_Produtos_0706.Classes
                 {
                     ListaDeProdutos.Add(produto);
                     IDproduto++;
-                    return "\n Produto Cadastrado!";
+                    return "\nProduto Cadastrado!";
                 }
 
                 else
                 {
-                    return "Não foi possivel cadastrar pois a marca é inexistente";
+                    return "\nNão foi possivel cadastrar pois a marca é inexistente!";
                 }
             }
         }
@@ -76,7 +76,9 @@ namespace Projeto_Produtos_0706.Classes
 
             else
             {
-                Console.WriteLine("A lista está vazia!!!");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nA lista está vazia!");
+                Console.ForegroundColor = ConsoleColor.White;
             }
 
             Console.ResetColor();
